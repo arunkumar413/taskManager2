@@ -143,26 +143,26 @@ export default function App() {
         <span>User</span>
       </div>
       <div className="all-tasks-container">
-        <h5> Today </h5>
+        <h5 className="date-category"> Today </h5>
         {todayElements}
         <hr />
-        <h5> Tomorrow </h5>
+        <h5 className="date-category"> Tomorrow </h5>
         {tomorrowElements}
         <hr />
 
-        <h5> This week </h5>
+        <h5 className="date-category"> This week </h5>
         {thisWeekElements}
         <hr />
 
-        <h5> Next week </h5>
+        <h5 className="date-category"> Next week </h5>
         {NextWeekElements}
         <hr />
 
-        <h5> This month </h5>
+        <h5 className="date-category"> This month </h5>
         {thisMonthElements}
         <hr />
 
-        <h5> Next month </h5>
+        <h5 className="date-category"> Next month </h5>
         {nextMonthElements}
         <hr />
       </div>

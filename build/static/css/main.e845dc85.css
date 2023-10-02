@@ -1,0 +1,2 @@
+.App{font-family:sans-serif;text-align:center}.all-tasks-container{margin-top:2rem}.task-container{grid-gap:1rem;gap:1rem;grid-template-columns:1fr 1fr 1fr 1fr}.task-container,.task-header{align-items:center;display:grid;justify-content:center;padding:.5rem}.task-header{background-color:#5a5bc4;border-radius:1rem;color:#fff;grid-template-columns:1fr 1fr 1fr 1fr;position:-webkit-sticky;position:sticky;top:0}.high{color:crimson}.low{color:green}.medium{color:blue}.urgent{color:red}.task-container:hover{background-color:#f5f5f5}
+/*# sourceMappingURL=main.e845dc85.css.map*/
