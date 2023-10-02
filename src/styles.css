@@ -1,0 +1,50 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.all-tasks-container {
+  margin-top: 2rem;
+}
+
+.task-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem;
+}
+
+.task-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  justify-content: center;
+  align-items: center;
+  background-color: #5a5bc4;
+  position: sticky;
+  top: 0;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  color: white;
+}
+
+.high {
+  color: crimson;
+}
+
+.low {
+  color: green;
+}
+
+.medium {
+  color: blue;
+}
+
+.urgent {
+  color: red;
+}
+
+.task-container:hover {
+  background-color: whitesmoke;
+}
