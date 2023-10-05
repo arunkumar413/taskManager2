@@ -10,16 +10,21 @@
 
 .task-container {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   justify-content: center;
   align-items: center;
   gap: 1rem;
   padding: 0.5rem;
 }
 
+.task-container:hover{
+  background-color: #9192b2;
+  color: white;
+}
+
 .task-header {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   justify-content: center;
   align-items: center;
   background-color: #5a5bc4;
@@ -42,13 +47,17 @@
   color: blue;
 }
 
+.high,.low,.medium,.urgent{
+  font-weight: bold;
+}
+
 .urgent {
   color: red;
 }
 
-.task-container:hover {
+/* .task-container:hover {
   background-color: whitesmoke;
-}
+} */
 
 
 .date-category{

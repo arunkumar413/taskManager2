@@ -13,7 +13,6 @@ export function sortItems(items) {
     return 0;
   });
 
-  console.log(sortedItems);
 
   return sortedItems;
 }

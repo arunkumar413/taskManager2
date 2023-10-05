@@ -1,2 +1,2 @@
 # taskManager2
-Created with CodeSandbox
+Task manager is simple tool to view the overview of the status of the tasks.

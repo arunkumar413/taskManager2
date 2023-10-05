@@ -2,11 +2,18 @@ import { useState } from "react";
 import "./styles.css";
 import { tasks } from "./tasks";
 import { sortItems } from "./sort";
+import { addWeeks, endOfTomorrow,add, addMonths,isToday,isTomorrow,isThisWeek,isThisMonth } from 'date-fns'
+import { IsDateFallsInNextWeek, isDateFallsInNextMonth } from "./util";
+
 
 export default function App() {
   const [tasksData, setTasks] = useState(tasks);
-  let sortedTasks = tasksData.sort((a, b) => a.dueDate - b.dueDate);
+  let sortedTasks = tasksData.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
   const today = new Date();
+
+ 
+
+
 
   const categorizedData = {
     today: [],
@@ -20,17 +27,17 @@ export default function App() {
   sortedTasks.forEach(function (item) {
     const itemDate = new Date(item.dueDate);
     const diffDays = Math.ceil((itemDate - today) / (1000 * 60 * 60 * 24));
-    if (diffDays === 0) {
+    if (isToday(new Date(item.dueDate))) {
       categorizedData.today.push(item);
-    } else if (diffDays === 1) {
+    } else if (isTomorrow(new Date(item.dueDate))) {
       categorizedData.tomorrow.push(item);
-    } else if (diffDays <= 7) {
+    } else if (isThisWeek( new Date(item.dueDate))) {
       categorizedData.thisWeek.push(item);
-    } else if (diffDays <= 14) {
+    } else if (IsDateFallsInNextWeek(new Date(item.dueDate))) {
       categorizedData.nextWeek.push(item);
-    } else if (itemDate.getMonth() === today.getMonth()) {
+    } else if (isThisMonth(new Date(item.dueDate))) {
       categorizedData.thisMonth.push(item);
-    } else if (itemDate.getMonth() === today.getMonth() + 1) {
+    } else if (isDateFallsInNextMonth(item.dueDate)) {
       categorizedData.nextMonth.push(item);
     }
   });
@@ -56,7 +63,7 @@ export default function App() {
     }
   }
 
-  const todayElements = sortedData.today.map(function (item, index) {
+  const todayElements = categorizedData.today.map(function (item, index) {
     return (
       <div key={index.toString()} className="task-container">
         <span className="title"> {item.title} </span>
@@ -64,6 +71,7 @@ export default function App() {
         <span> {item.status} </span>
         {/* <span> {new Date(item.dueDate).toLocaleString()} </span> */}
         <span> {item.user} </span>
+        <span> {item.dueDate} </span>
       </div>
     );
   });
@@ -76,6 +84,8 @@ export default function App() {
         <span> {item.status} </span>
         {/* <span> {new Date(item.dueDate).toLocaleString()} </span> */}
         <span> {item.user} </span>
+        <span> {item.dueDate} </span>
+
       </div>
     );
   });
@@ -88,6 +98,8 @@ export default function App() {
         <span> {item.status} </span>
         {/* <span> {new Date(item.dueDate).toLocaleString()} </span> */}
         <span> {item.user} </span>
+        <span> {item.dueDate} </span>
+
       </div>
     );
   });
@@ -100,6 +112,8 @@ export default function App() {
         <span> {item.status} </span>
         {/* <span> {new Date(item.dueDate).toLocaleString()} </span> */}
         <span> {item.user} </span>
+        <span> {item.dueDate} </span>
+
       </div>
     );
   });
@@ -115,6 +129,8 @@ export default function App() {
         <span> {item.status} </span>
         {/* <span> {new Date(item.dueDate).toLocaleString()} </span> */}
         <span> {item.user} </span>
+        <span> {item.dueDate} </span>
+
       </div>
     );
   });
@@ -130,6 +146,8 @@ export default function App() {
         <span> {item.status} </span>
         {/* <span> {new Date(item.dueDate).toLocaleString()} </span> */}
         <span> {item.user} </span>
+        <span> {item.dueDate} </span>
+
       </div>
     );
   });
@@ -141,6 +159,8 @@ export default function App() {
         <span>Priority</span>
         <span>Status</span>
         <span>User</span>
+        <span>Due date</span>
+
       </div>
       <div className="all-tasks-container">
         <h5 className="date-category"> Today </h5>
