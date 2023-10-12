@@ -2,16 +2,26 @@ import { useState } from "react";
 import "./styles.css";
 import { tasks } from "./tasks";
 import { sortItems } from "./sort";
-import { addWeeks, endOfTomorrow,add, addMonths,isToday,isTomorrow,isThisWeek,isThisMonth } from 'date-fns'
+import { addWeeks, endOfTomorrow, add, addMonths, isToday, isTomorrow, isThisWeek, isThisMonth } from 'date-fns'
 import { IsDateFallsInNextWeek, isDateFallsInNextMonth } from "./util";
+import { TaskModal } from "./TaskModal";
 
 
 export default function App() {
   const [tasksData, setTasks] = useState(tasks);
   let sortedTasks = tasksData.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+  const [selectedTask, setSelectedTask] = useState(  {
+    title: "My task one",
+    dueDate: new Date().toISOString(),
+    priority: "High",
+    status: "In progress",
+    user: "Arun"
+  })
+  const [isModalOpen, setModalOpen] = useState(false);
+
   const today = new Date();
 
- 
+
 
 
 
@@ -31,7 +41,7 @@ export default function App() {
       categorizedData.today.push(item);
     } else if (isTomorrow(new Date(item.dueDate))) {
       categorizedData.tomorrow.push(item);
-    } else if (isThisWeek( new Date(item.dueDate))) {
+    } else if (isThisWeek(new Date(item.dueDate))) {
       categorizedData.thisWeek.push(item);
     } else if (IsDateFallsInNextWeek(new Date(item.dueDate))) {
       categorizedData.nextWeek.push(item);
@@ -63,9 +73,15 @@ export default function App() {
     }
   }
 
+  function handleTaskClick(evt, item) {
+    setSelectedTask(item);
+    setModalOpen(true)
+
+  }
+
   const todayElements = categorizedData.today.map(function (item, index) {
     return (
-      <div key={index.toString()} className="task-container">
+      <div onClick={(evt) => handleTaskClick(evt, item)} key={index.toString()} className="task-container">
         <span className="title"> {item.title} </span>
         <span className={addClass(item.priority)}> {item.priority} </span>
         <span> {item.status} </span>
@@ -153,39 +169,47 @@ export default function App() {
   });
 
   return (
-    <div className="App">
-      <div className="task-header">
-        <span>Title</span>
-        <span>Priority</span>
-        <span>Status</span>
-        <span>User</span>
-        <span>Due date</span>
+    <div>
+      <div className="App">
+        <div className="task-header">
+          <span>Title</span>
+          <span>Priority</span>
+          <span>Status</span>
+          <span>User</span>
+          <span>Due date</span>
 
+        </div>
+        <div className="all-tasks-container">
+          <h5 className="date-category"> Today </h5>
+          {todayElements}
+          <hr />
+          <h5 className="date-category"> Tomorrow </h5>
+          {tomorrowElements}
+          <hr />
+
+          <h5 className="date-category"> This week </h5>
+          {thisWeekElements}
+          <hr />
+
+          <h5 className="date-category"> Next week </h5>
+          {NextWeekElements}
+          <hr />
+
+          <h5 className="date-category"> This month </h5>
+          {thisMonthElements}
+          <hr />
+
+          <h5 className="date-category"> Next month </h5>
+          {nextMonthElements}
+          <hr />
+        </div>
       </div>
-      <div className="all-tasks-container">
-        <h5 className="date-category"> Today </h5>
-        {todayElements}
-        <hr />
-        <h5 className="date-category"> Tomorrow </h5>
-        {tomorrowElements}
-        <hr />
+      <TaskModal 
+      isModalOpen={isModalOpen}
+        selectedTask={selectedTask}
+        closeModal={() =>setModalOpen(false)}
 
-        <h5 className="date-category"> This week </h5>
-        {thisWeekElements}
-        <hr />
-
-        <h5 className="date-category"> Next week </h5>
-        {NextWeekElements}
-        <hr />
-
-        <h5 className="date-category"> This month </h5>
-        {thisMonthElements}
-        <hr />
-
-        <h5 className="date-category"> Next month </h5>
-        {nextMonthElements}
-        <hr />
-      </div>
+      />
     </div>
   );
 }
