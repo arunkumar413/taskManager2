@@ -1,10 +1,12 @@
 // Modal as a separate component
 import { useEffect, useRef, useState } from "react";
+import Markdown from 'react-markdown'
+
 
 export function TaskModal({ isModalOpen, closeModal, selectedTask }) {
 
     const [comments, setComments] = useState([{
-        comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        comment: "### Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         commentedBy: 'Arun',
         date: new Date().toLocaleString()
     },
@@ -43,7 +45,8 @@ export function TaskModal({ isModalOpen, closeModal, selectedTask }) {
 
         return (
             <div key={index.toString()} className="comment-item">
-                <p>{item.comment}</p>
+                <Markdown>{item.comment}</Markdown>
+                {/* <p>{item.comment}</p> */}
 
             </div>
         )
@@ -59,14 +62,14 @@ export function TaskModal({ isModalOpen, closeModal, selectedTask }) {
             </div>
 
             <div className="selected-task-modal-body">
-
-                {selectedTask.description}
+                <p className="task-description">
+                    {selectedTask.description}
+                </p>
 
                 <div className="selected-task-modal-comments-container">
-
-                {commentElements}
-                <textarea placeholder="Enter your comments here" rows={5} cols={100}/>
-                <button> Add comment </button>
+                    {commentElements}
+                    <textarea placeholder="Enter your comments here" rows={5} cols={100} />
+                    <button> Add comment </button>
 
                 </div>
             </div>
