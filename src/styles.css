@@ -82,7 +82,7 @@ body {
 
 .selected-task-modal-header {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 3fr 1fr 1fr 1fr;
   text-align: center;
   justify-content: flex-start;
   align-items: center;
