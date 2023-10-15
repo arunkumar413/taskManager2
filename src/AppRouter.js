@@ -8,6 +8,7 @@ import App from "./App";
 import { ContactPage } from "./pages/ContactPage";
 import { Layout } from "./Layout";
 import { AboutPage } from "./pages/AboutPage";
+import { TaskPage } from "./pages/TaskPage";
 
 
 
@@ -26,6 +27,10 @@ export const AppRouter = createBrowserRouter([
         {
             path: "/about",
             element: <AboutPage />,
+        },
+        {
+            path: "/task/:task_id",
+            element: <TaskPage />,
         },
         ]
     },

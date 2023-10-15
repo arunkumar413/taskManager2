@@ -5,12 +5,13 @@ import { sortItems } from "./sort";
 import { addWeeks, endOfTomorrow, add, addMonths, isToday, isTomorrow, isThisWeek, isThisMonth } from 'date-fns'
 import { IsDateFallsInNextWeek, isDateFallsInNextMonth } from "./util";
 import { TaskModal } from "./components/TaskModal";
+import { useNavigate } from "react-router-dom";
 
 
 export default function App() {
   const [tasksData, setTasks] = useState(tasks);
   let sortedTasks = tasksData.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
-  const [selectedTask, setSelectedTask] = useState(  {
+  const [selectedTask, setSelectedTask] = useState({
     title: "My task one",
     dueDate: new Date().toISOString(),
     priority: "High",
@@ -18,7 +19,7 @@ export default function App() {
     user: "Arun"
   })
   const [isModalOpen, setModalOpen] = useState(false);
-
+  const navigate = useNavigate();
   const today = new Date();
 
 
@@ -74,20 +75,21 @@ export default function App() {
   }
 
   function handleTaskClick(evt, item) {
-    setSelectedTask(item);
-    setModalOpen(true)
-
+    // setSelectedTask(item);
+    // setModalOpen(true)
+    navigate('/task/' + item.id, { state: item })
   }
 
   const todayElements = categorizedData.today.map(function (item, index) {
     return (
       <div onClick={(evt) => handleTaskClick(evt, item)} key={index.toString()} className="task-container">
+        <span>  {index + 1}</span>
         <span className="title"> {item.title} </span>
         <span className={addClass(item.priority)}> {item.priority} </span>
         <span> {item.status} </span>
         {/* <span> {new Date(item.dueDate).toLocaleString()} </span> */}
         <span> {item.user} </span>
-        <span> {item.dueDate} </span>
+        {/* <span> {item.dueDate} </span> */}
       </div>
     );
   });
@@ -95,12 +97,13 @@ export default function App() {
   const tomorrowElements = categorizedData.tomorrow.map(function (item, index) {
     return (
       <div key={index.toString()} className="task-container">
+        <span>  {index + 1}</span>
         <span className="title"> {item.title} </span>
         <span className={addClass(item.priority)}> {item.priority} </span>
         <span> {item.status} </span>
         {/* <span> {new Date(item.dueDate).toLocaleString()} </span> */}
         <span> {item.user} </span>
-        <span> {item.dueDate} </span>
+        {/* <span> {item.dueDate} </span> */}
 
       </div>
     );
@@ -109,12 +112,14 @@ export default function App() {
   const thisWeekElements = categorizedData.thisWeek.map(function (item, index) {
     return (
       <div key={index.toString()} className="task-container">
+        <span>  {index + 1}</span>
+
         <span className="title"> {item.title} </span>
         <span className={addClass(item.priority)}> {item.priority} </span>
         <span> {item.status} </span>
         {/* <span> {new Date(item.dueDate).toLocaleString()} </span> */}
         <span> {item.user} </span>
-        <span> {item.dueDate} </span>
+        {/* <span> {item.dueDate} </span> */}
 
       </div>
     );
@@ -123,12 +128,14 @@ export default function App() {
   const NextWeekElements = categorizedData.nextWeek.map(function (item, index) {
     return (
       <div key={index.toString()} className="task-container">
+        <span>  {index + 1}</span>
+
         <span className="title"> {item.title} </span>
         <span className={addClass(item.priority)}> {item.priority} </span>
         <span> {item.status} </span>
         {/* <span> {new Date(item.dueDate).toLocaleString()} </span> */}
         <span> {item.user} </span>
-        <span> {item.dueDate} </span>
+        {/* <span> {item.dueDate} </span> */}
 
       </div>
     );
@@ -140,12 +147,14 @@ export default function App() {
   ) {
     return (
       <div key={index.toString()} className="task-container">
+        <span>  {index + 1}</span>
+
         <span className="title"> {item.title} </span>
         <span className={addClass(item.priority)}> {item.priority} </span>
         <span> {item.status} </span>
         {/* <span> {new Date(item.dueDate).toLocaleString()} </span> */}
         <span> {item.user} </span>
-        <span> {item.dueDate} </span>
+        {/* <span> {item.dueDate} </span> */}
 
       </div>
     );
@@ -157,12 +166,14 @@ export default function App() {
   ) {
     return (
       <div key={index.toString()} className="task-container">
+        <span>  {index + 1}</span>
+
         <span className="title"> {item.title} </span>
         <span className={addClass(item.priority)}> {item.priority} </span>
         <span> {item.status} </span>
         {/* <span> {new Date(item.dueDate).toLocaleString()} </span> */}
         <span> {item.user} </span>
-        <span> {item.dueDate} </span>
+        {/* <span> {item.dueDate} </span> */}
 
       </div>
     );
@@ -172,11 +183,12 @@ export default function App() {
     <div>
       <div className="App">
         <div className="task-header">
+          <span> Sl.no/ID</span>
           <span>Title</span>
           <span>Priority</span>
           <span>Status</span>
           <span>User</span>
-          <span>Due date</span>
+          {/* <span>Due date</span> */}
 
         </div>
         <div className="all-tasks-container">
@@ -204,10 +216,10 @@ export default function App() {
           <hr />
         </div>
       </div>
-      <TaskModal 
-      isModalOpen={isModalOpen}
+      <TaskModal
+        isModalOpen={isModalOpen}
         selectedTask={selectedTask}
-        closeModal={() =>setModalOpen(false)}
+        closeModal={() => setModalOpen(false)}
 
       />
     </div>
