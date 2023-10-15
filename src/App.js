@@ -4,7 +4,7 @@ import { tasks } from "./tasks";
 import { sortItems } from "./sort";
 import { addWeeks, endOfTomorrow, add, addMonths, isToday, isTomorrow, isThisWeek, isThisMonth } from 'date-fns'
 import { IsDateFallsInNextWeek, isDateFallsInNextMonth } from "./util";
-import { TaskModal } from "./TaskModal";
+import { TaskModal } from "./components/TaskModal";
 
 
 export default function App() {
