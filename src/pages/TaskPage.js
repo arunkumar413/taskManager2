@@ -11,25 +11,25 @@ export function TaskPage() {
     const [comments, setComments] = useState([{
         comment: "### Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         commentedBy: 'Arun',
-        date: new Date().toLocaleString()
+        date: new Date().toISOString()
     },
 
     {
         comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         commentedBy: 'Arun',
-        date: new Date().toLocaleString()
+        date: new Date().toISOString()
+
+    },
+    {
+        comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        commentedBy: 'Arun',
+        date: new Date().toISOString()
 
     },
     {
         comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         commentedBy: 'Arun',
-        date: new Date().toLocaleString()
-
-    },
-    {
-        comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        commentedBy: 'Arun',
-        date: new Date().toLocaleString()
+        date: new Date().toISOString()
 
     }
     ])
@@ -50,10 +50,32 @@ export function TaskPage() {
             <div key={index.toString()} className="comment-item">
                 <Markdown>{item.comment}</Markdown>
                 {/* <p>{item.comment}</p> */}
+                <div className="comment-footer">
+                    <span className="commented-by">{item.commentedBy}</span>
+                    <span className="commented-date">{new Date(item.date).toDateString()}</span>
+                </div>
+
 
             </div>
         )
     })
+
+    function addClass(priority) {
+        if (priority === "High") {
+            return "high";
+        } else if (priority === "Low") {
+            return "low";
+        } else if (priority === "Medium") {
+            return "medium";
+        } else if (priority === "Urgent") {
+            return "urgent";
+        }
+        else {
+            return ''
+        }
+    }
+
+
 
     return (
         <div className="TaskPage">
@@ -68,7 +90,10 @@ export function TaskPage() {
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-list-todo"><rect x="3" y="5" width="6" height="6" rx="1" /><path d="m3 17 2 2 4-4" /><path d="M13 6h8" /><path d="M13 12h8" /><path d="M13 18h8" /></svg>
                     <p>  {selectedTask.status}</p>
                 </div>
-                <p>  {selectedTask.priority}</p>
+                <p className={addClass(selectedTask.priority)} >  {selectedTask.priority}</p>
+                <p>  {new Date(selectedTask.dueDate).toDateString()}</p>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-file-edit"><path d="M4 13.5V4a2 2 0 0 1 2-2h8.5L20 7.5V20a2 2 0 0 1-2 2h-5.5"/><polyline points="14 2 14 8 20 8"/><path d="M10.42 12.61a2.1 2.1 0 1 1 2.97 2.97L7.95 21 4 22l.99-3.95 5.43-5.44Z"/></svg>
+
             </div>
 
             <div className="selected-task-page-body">
