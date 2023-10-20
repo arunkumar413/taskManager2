@@ -66,7 +66,7 @@ export function TaskPage() {
         } else if (priority === "Low") {
             return "low";
         } else if (priority === "Medium") {
-            return "medium";
+            return "medium-priority";
         } else if (priority === "Urgent") {
             return "urgent";
         }

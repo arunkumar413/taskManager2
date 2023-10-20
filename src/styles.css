@@ -49,13 +49,13 @@ body {
   color: green;
 }
 
-.medium {
+.medium-priority {
   color: blue;
 }
 
 .high,
 .low,
-.medium,
+.medium-priority,
 .urgent {
   font-weight: bold;
 }
