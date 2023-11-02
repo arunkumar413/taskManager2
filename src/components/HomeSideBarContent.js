@@ -1,18 +1,37 @@
 import React, { useEffect, useState } from "react"
+import { isHighSelected, isLowSelected, isMediumSelected, isUrgentSelected } from "../appState/taskFilterAtoms";
+import { useRecoilState } from "recoil";
 
 
 
 export function HomeSideBarContent() {
 
+    const [lowSelected, setLowSelected] = useRecoilState(isLowSelected);
+    const [mediumSelected,setMediumSelected]= useRecoilState(isMediumSelected);
+    const [highSelected,setHighSelected]= useRecoilState(isHighSelected)
+    const [urgentSelected,setUrgentSelected]= useRecoilState(isUrgentSelected)
+
+    function handleLowChange(){
+        setLowSelected(!lowSelected)
+    }
+
+    function handleMediumChange(){
+        setMediumSelected(!mediumSelected)
+    }
+
     return (
         <>
             <h4> Filter by priority </h4>
-            <input type="checkbox" id="Low" name="Low" value="Low" />
+            <input onChange={handleLowChange} type="checkbox" id="Low" name="Low" checked={lowSelected} />
             <label htmlFor="Low"> Low</label> <br />
-            <input type="checkbox" id="Medium" name="Medium" value="Medium" />
+
+
+            <input onChange={handleMediumChange} checked={mediumSelected} type="checkbox" id="Medium" name="Medium" value="Medium" />
             <label htmlFor="Medium"> Medium</label> <br />
+
             <input type="checkbox" id="High" name="High" value="High" />
             <label htmlFor="High"> High</label> <br />
+
             <input type="checkbox" id="Urgent" name="Urgent" value="Urgent" />
             <label htmlFor="Urgent"> Urgent</label> <br />
 

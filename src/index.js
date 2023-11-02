@@ -9,13 +9,20 @@ import {
 
 import App from "./App";
 import { AppRouter } from "./AppRouter";
+import { RecoilRoot } from "recoil";
+import { Provider } from "react-redux";
+import appStore from "./appState/appStore";
 
 const rootElement = document.getElementById("root");
 const root = createRoot(rootElement);
 
 root.render(
   <StrictMode>
+        <RecoilRoot>
+        <Provider store={appStore}>
         <RouterProvider router={AppRouter} />
+        </Provider>
+        </RecoilRoot>
 
     {/* <App /> */}
   </StrictMode>

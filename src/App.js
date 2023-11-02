@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./styles.css";
 import { tasks } from "./tasks";
 import { sortItems } from "./sort";
@@ -6,11 +6,14 @@ import { addWeeks, endOfTomorrow, add, addMonths, isToday, isTomorrow, isThisWee
 import { IsDateFallsInNextWeek, isDateFallsInNextMonth } from "./util";
 import { TaskModal } from "./components/TaskModal";
 import { useNavigate } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { isHighSelected, isLowSelected, isMediumSelected, isUrgentSelected } from "./appState/taskFilterAtoms";
 
 
 export default function App() {
   const [tasksData, setTasks] = useState(tasks);
-  let sortedTasks = tasksData.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+  // let sortedTasks = tasksData.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+  const [sortedTasks,setSortedTasks]= useState([])
   const [selectedTask, setSelectedTask] = useState({
     title: "My task one",
     dueDate: new Date().toISOString(),
@@ -21,6 +24,48 @@ export default function App() {
   const [isModalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
   const today = new Date();
+
+
+  const lowSelected = useRecoilValue(isLowSelected)
+  const mediumSelected = useRecoilValue(isMediumSelected)
+  const highSelected= useRecoilValue(isHighSelected)
+  const urgentSelected = useRecoilValue(isUrgentSelected)
+
+  const [filteredTasks, setFilteredTasks] = useState([])
+
+  useEffect(function () {
+    let filteredItems = sortedTasks.filter(function (item, index) {
+
+      if (isLowSelected && item.priority === "Low") {
+        return item
+      }
+      else if (isMediumSelected && item.priority === 'Medium') {
+        return item
+      }
+
+      else if (isHighSelected && item.priority === "High") {
+        return item
+      }
+
+      else if (isUrgentSelected && item.priority === "Urgent") {
+        return item
+      }
+
+
+    })
+
+    console.log(filteredItems)
+
+    setSortedTasks(filteredItems)
+
+
+  }, [lowSelected, mediumSelected, highSelected, urgentSelected]);
+
+
+  useEffect(function(){
+    let sortTasks = tasksData.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+    setSortedTasks(sortTasks)
+  },[])
 
 
 
