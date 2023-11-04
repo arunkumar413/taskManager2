@@ -1,32 +1,50 @@
 import React, { useEffect, useState } from "react"
-import { isHighSelected, isLowSelected, isMediumSelected, isUrgentSelected } from "../appState/taskFilterAtoms";
+// import { isHighSelected, isLowSelected, isMediumSelected, isUrgentSelected } from "../appState/taskFilterAtoms";
 import { useRecoilState } from "recoil";
+import { useDispatch, useSelector } from "react-redux";
+import { filterTasks, increment, setLowSelected, setMediumSelected } from "../appState/tasksFilterSlice";
 
 
 
 export function HomeSideBarContent() {
 
-    const [lowSelected, setLowSelected] = useRecoilState(isLowSelected);
-    const [mediumSelected,setMediumSelected]= useRecoilState(isMediumSelected);
-    const [highSelected,setHighSelected]= useRecoilState(isHighSelected)
-    const [urgentSelected,setUrgentSelected]= useRecoilState(isUrgentSelected)
+    const count = useSelector((state) => state.value)
+    const isLowSelected = useSelector((state) => state.isLowSelected)
+    const isMediumSelected = useSelector(state => state.isMediumSelected)
+    const isHighSelected = useSelector(state => state.isHighSelected)
+    const isUrgentSelected = useSelector(state => state.isUrgentSelected)
 
-    function handleLowChange(){
-        setLowSelected(!lowSelected)
+
+    const dispatch = useDispatch()
+
+
+    function handleLowChange() {
+        // setLowSelected(!lowSelected)
+        dispatch(setLowSelected())
     }
 
-    function handleMediumChange(){
-        setMediumSelected(!mediumSelected)
+    function handleMediumChange() {
+        dispatch(setMediumSelected())
     }
+
+    function handleIncrement() {
+        dispatch(increment())
+    }
+
+
+useEffect(function(){
+    dispatch(filterTasks())
+},[isLowSelected,isMediumSelected])
+
 
     return (
         <>
             <h4> Filter by priority </h4>
-            <input onChange={handleLowChange} type="checkbox" id="Low" name="Low" checked={lowSelected} />
+            <input onChange={handleLowChange} type="checkbox" id="Low" name="Low" checked={isLowSelected} />
             <label htmlFor="Low"> Low</label> <br />
 
 
-            <input onChange={handleMediumChange} checked={mediumSelected} type="checkbox" id="Medium" name="Medium" value="Medium" />
+            <input onChange={handleMediumChange} checked={isMediumSelected} type="checkbox" id="Medium" name="Medium" value="Medium" />
             <label htmlFor="Medium"> Medium</label> <br />
 
             <input type="checkbox" id="High" name="High" value="High" />
@@ -57,6 +75,9 @@ export function HomeSideBarContent() {
             <label htmlFor="docs"> Documentation</label> <br />
             <input type="checkbox" id="testing" name="testing" value="testing" />
             <label htmlFor="testing"> Testing</label> <br />
+
+            <div> {count}</div>
+            <button onClick={handleIncrement}> increment</button>
         </>
     )
 }
