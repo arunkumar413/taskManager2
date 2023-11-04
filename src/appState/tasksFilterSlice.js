@@ -90,7 +90,7 @@ export const counterSlice = createSlice({
       let nextWeek = []
       let thisMonth = [];
       let nextMonth = []
-      state.sortedTasks.forEach(function (item) {
+      state.filteredTasks.forEach(function (item) {
         if (isToday(new Date(item.dueDate))) {
           today.push(item);
         } else if (isTomorrow(new Date(item.dueDate))) {

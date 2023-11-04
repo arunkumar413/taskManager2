@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 // import { isHighSelected, isLowSelected, isMediumSelected, isUrgentSelected } from "../appState/taskFilterAtoms";
 import { useRecoilState } from "recoil";
 import { useDispatch, useSelector } from "react-redux";
-import { filterTasks, increment, setLowSelected, setMediumSelected } from "../appState/tasksFilterSlice";
+import { categorizeTasks, filterTasks, increment, setHighSelected, setLowSelected, setMediumSelected, setUrgentSelected } from "../appState/tasksFilterSlice";
 
 
 
@@ -34,26 +34,27 @@ export function HomeSideBarContent() {
 
 useEffect(function(){
     dispatch(filterTasks())
-},[isLowSelected,isMediumSelected])
+    dispatch(categorizeTasks())
+},[isLowSelected,isMediumSelected,isHighSelected,isUrgentSelected])
 
 
     return (
         <>
-            <h4> Filter by priority </h4>
+            <h4> Select priority </h4>
             <input onChange={handleLowChange} type="checkbox" id="Low" name="Low" checked={isLowSelected} />
             <label htmlFor="Low"> Low</label> <br />
 
 
-            <input onChange={handleMediumChange} checked={isMediumSelected} type="checkbox" id="Medium" name="Medium" value="Medium" />
+            <input onChange={handleMediumChange} checked={isMediumSelected} type="checkbox" id="Medium" name="Medium" />
             <label htmlFor="Medium"> Medium</label> <br />
 
-            <input type="checkbox" id="High" name="High" value="High" />
+            <input onChange={()=>dispatch(setHighSelected())} checked={isHighSelected} type="checkbox" id="High" name="High" />
             <label htmlFor="High"> High</label> <br />
 
-            <input type="checkbox" id="Urgent" name="Urgent" value="Urgent" />
+            <input onChange={()=>dispatch(setUrgentSelected())} checked={isUrgentSelected} type="checkbox" id="Urgent" name="Urgent" />
             <label htmlFor="Urgent"> Urgent</label> <br />
 
-            <h4> Filter by Status </h4>
+            <h4> Select task status </h4>
             <input type="checkbox" id="in-progress" name="in-progress" value="In progress" />
             <label htmlFor="in-progress"> In progress</label> <br />
             <input type="checkbox" id="done" name="done" value="Done" />
@@ -63,7 +64,7 @@ useEffect(function(){
             <input type="checkbox" id="canceled" name="canceled" value="Canceled" />
             <label htmlFor="canceled"> Canceled</label> <br />
 
-            <h4> Filter by labels </h4>
+            <h4> Select labels </h4>
 
             <input type="checkbox" id="ui" name="ui" value="UI/UX" />
             <label htmlFor="ui"> UI/UX</label> <br />
@@ -75,9 +76,6 @@ useEffect(function(){
             <label htmlFor="docs"> Documentation</label> <br />
             <input type="checkbox" id="testing" name="testing" value="testing" />
             <label htmlFor="testing"> Testing</label> <br />
-
-            <div> {count}</div>
-            <button onClick={handleIncrement}> increment</button>
         </>
     )
 }
