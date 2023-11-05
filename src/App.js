@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { isHighSelected, isLowSelected, isMediumSelected, isUrgentSelected } from "./appState/taskFilterAtoms";
 import { useDispatch, useSelector } from "react-redux";
-import { categorizeTasks, setSelectedTask, sortTasksByDate } from "./appState/tasksFilterSlice";
+import { categorizeTasks, filterTasks, setSelectedTask, sortTasksByDate } from "./appState/tasksFilterSlice";
 
 
 export default function App() {
@@ -45,6 +45,7 @@ export default function App() {
   useEffect(function(){
 
     dispatch(sortTasksByDate())
+    dispatch(filterTasks())
     dispatch(categorizeTasks())
 
 
