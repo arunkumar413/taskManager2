@@ -107,7 +107,7 @@ export function TaskPage() {
 
 
 
-                <textarea style={{ width: '100%' }} className="add-comment-box" placeholder="Add a new comment" rows={5} cols={100} />
+                <textarea style={{ width: '100%' }} className="add-comment-box input primary filled" placeholder="Add a new comment" rows={5} cols={100} />
                 <button> Add comment </button>
             </div>
 
