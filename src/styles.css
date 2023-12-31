@@ -121,8 +121,7 @@ body {
 
 .comment-item {
   padding: 0.5rem;
-  border-radius: 0.5rem;
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
+  border-bottom: solid 0.5px lightgrey;
 }
 
 .selected-task-modal-comments-container {
@@ -172,6 +171,8 @@ aside {
 
 main {
   grid-column: 3/13;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
 }
 
 
@@ -259,4 +260,8 @@ a:hover{
   justify-content: center;
   align-items: center;
   gap: 1rem;
+}
+
+.selected-task-page-comments-container{
+  border-top: solid 0.5px lightgrey;
 }

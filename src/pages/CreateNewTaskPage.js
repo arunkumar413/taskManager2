@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Labels } from "../components/Labels";
 
 
 export function CreateNewTaskPage() {
@@ -13,6 +14,8 @@ export function CreateNewTaskPage() {
         labels: [],
 
     })
+
+    const [selectedLabels, setSelectedLabels] = useState([])
 
 
     function handleNewTaskInfo(evt) {
@@ -29,7 +32,7 @@ export function CreateNewTaskPage() {
             </div>
             <div className="new-task-form">
                 <label>  Task title   </label>
-                <input name="title" onChange={handleNewTaskInfo} placeholder="Title" className="input medium primary filled" type="text" />
+                <input name="title" onChange={handleNewTaskInfo} placeholder="Title" className="input small primary filled" type="text" />
 
                 <div className="new-task-second-row" style={{
                     display: 'flex',
@@ -40,7 +43,7 @@ export function CreateNewTaskPage() {
                 }}>
 
                     <label>Priority</label>
-                    <input onChange={handleNewTaskInfo} name="priority" type="text" list='select-priority' className="input medium primary filled" />
+                    <input onChange={handleNewTaskInfo} name="priority" type="text" list='select-priority' className="input small primary filled" />
                     <datalist id='select-priority' >
                         <option value="Low">Low</option>
                         <option value="Medium">Medium</option>
@@ -50,7 +53,7 @@ export function CreateNewTaskPage() {
 
 
                     <label>Status</label>
-                    <input onChange={handleNewTaskInfo} name="status" type="text" list="select-status" className="input medium primary filled" />
+                    <input onChange={handleNewTaskInfo} name="status" type="text" list="select-status" className="input small primary filled" />
                     <datalist id='select-status'>
                         <option value="In progress">In progress</option>
                         <option value="Backlog"> Backlog</option>
@@ -58,23 +61,18 @@ export function CreateNewTaskPage() {
                     </datalist>
 
                     <label> Assign to</label>
-                    <input onChange={handleNewTaskInfo} name="user" type="text" className="input medium primary filled" />
+                    <input onChange={handleNewTaskInfo} name="user" type="text" className="input small primary filled" />
 
                     <label> Due date</label>
-                    <input onChange={handleNewTaskInfo} name="dueDate" type="date" className="input medium primary filled" />
+                    <input onChange={handleNewTaskInfo} name="dueDate" type="date" className="input small primary filled" />
                 </div>
 
                 <label> Description (supports markdown) </label>
                 <textarea className="input primary filled" onChange={handleNewTaskInfo} name="description" rows={10} />
 
-                <label> Select labels</label>
-                <div className="label-list" style={{ display: 'flex', flexDirection: "row", justifyContent: "flex-start", alignItems: 'center', gap: "1rem" }}>
-                    <button className="btn small primary outlined">bug</button>
-                    <button className="btn small primary outlined">feature</button>
-                    <button className="btn small primary outlined">enhancement</button>
-                </div>
-
-                <button className="btn primary medium filled">Save</button>
+                <p> Select labels</p>
+                <Labels selectedLabels={selectedLabels} setSelectedLabels={setSelectedLabels}/>
+                <button className="btn primary small filled">Save</button>
 
             </div>
 

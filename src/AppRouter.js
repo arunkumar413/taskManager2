@@ -10,6 +10,7 @@ import { Layout } from "./Layout";
 import { AboutPage } from "./pages/AboutPage";
 import { TaskPage } from "./pages/TaskPage";
 import { CreateNewTaskPage } from "./pages/CreateNewTaskPage";
+import { EditTaskPage } from "./pages/EditTaskPage";
 
 
 
@@ -36,6 +37,10 @@ export const AppRouter = createBrowserRouter([
         {
             path:'/add-new-task',
             element:<CreateNewTaskPage/>
+        },
+        {
+            path:'/task/:task_id/edit',
+            element:<EditTaskPage/>
         }
         ]
     },

@@ -19,7 +19,8 @@ export const counterSlice = createSlice({
       dueDate: new Date().toISOString(),
       priority: "High",
       status: "In progress",
-      user: "Arun"
+      user: "Arun",
+      description:" description"
     },
     today: [],
     tomorrow: [],

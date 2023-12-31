@@ -1,12 +1,13 @@
 // Modal as a separate component
 import { useEffect, useRef, useState } from "react";
 import Markdown from 'react-markdown'
-import { useLocation, useNavigate, useNavigation } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Link, useLocation, useNavigate, useNavigation } from "react-router-dom";
 
 
 export function TaskPage() {
     const location = useLocation();
-    const selectedTask = location.state
+    const selectedTask = useSelector(state => state.selectedTask)
 
     const [comments, setComments] = useState([{
         comment: "### Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
@@ -33,15 +34,13 @@ export function TaskPage() {
 
     }
     ])
-    // const ref = useRef();
 
-    // useEffect(() => {
-    //     if (isModalOpen) {
-    //         ref.current?.showModal();
-    //     } else {
-    //         ref.current?.close();
-    //     }
-    // }, [isModalOpen]);
+
+
+    useEffect(function () {
+
+
+    }, [selectedTask])
 
 
     const commentElements = comments.map(function (item, index) {
@@ -76,7 +75,6 @@ export function TaskPage() {
     }
 
 
-
     return (
         <div className="TaskPage">
             <div className="selected-task-page-header">
@@ -92,8 +90,9 @@ export function TaskPage() {
                 </div>
                 <p className={addClass(selectedTask.priority)} >  {selectedTask.priority}</p>
                 <p>  {new Date(selectedTask.dueDate).toDateString()}</p>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-file-edit"><path d="M4 13.5V4a2 2 0 0 1 2-2h8.5L20 7.5V20a2 2 0 0 1-2 2h-5.5"/><polyline points="14 2 14 8 20 8"/><path d="M10.42 12.61a2.1 2.1 0 1 1 2.97 2.97L7.95 21 4 22l.99-3.95 5.43-5.44Z"/></svg>
-
+                <Link to={`/task/${selectedTask.id}/edit`}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-file-edit"><path d="M4 13.5V4a2 2 0 0 1 2-2h8.5L20 7.5V20a2 2 0 0 1-2 2h-5.5" /><polyline points="14 2 14 8 20 8" /><path d="M10.42 12.61a2.1 2.1 0 1 1 2.97 2.97L7.95 21 4 22l.99-3.95 5.43-5.44Z" /></svg>
+                </Link>
             </div>
 
             <div className="selected-task-page-body">
