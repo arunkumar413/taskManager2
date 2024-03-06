@@ -3,12 +3,8 @@ import { Labels } from "../components/Labels";
 import { DropDown } from "../components/DropDown";
 
 export function CreateNewTaskPage() {
-    const [selectedOption, setSelectedOption] = useState("Select Priority");
-    const [progress, setProgress] = useState("Select progress");
-
-
-
-
+  const [selectedOption, setSelectedOption] = useState("Select Priority");
+  const [progress, setProgress] = useState("Select progress");
 
   const [newTaskInfo, setNewTaskInfo] = useState({
     title: "",
@@ -28,8 +24,6 @@ export function CreateNewTaskPage() {
     });
   }
 
-
-
   return (
     <div className="CreateNewTaskPage">
       <div style={{ textAlign: "center" }} className="new-task-heading">
@@ -39,37 +33,37 @@ export function CreateNewTaskPage() {
         <label> Task title </label>
         <input
           name="title"
-          onChange={handleNewTaskInfo}selectedValue
+          onChange={handleNewTaskInfo}
+          selectedValue
           placeholder="Title"
           className="input small primary filled"
           type="text"
         />
-
         <div
           className="new-task-second-row"
           style={{
-            display: "grid",
-            // flexDirection: "row",
-            gridTemplateColumns:"repeat(8, 1fr)",
-            justifyContent: "center",
+            display: "flex",
+            flexDirection: "row",
+            // gridTemplateColumns: "repeat(8, 1fr)",
+            justifyContent: "flex-start",
             alignItems: "center",
-            gap: "0.5rem",
+            gap: "1rem",
           }}
         >
           <label>Priority</label>
 
-          <DropDown options={["Low", "Medium", "High", "Urgent"]} value={selectedOption} handleSelected={setSelectedOption} />
-          {/* <input onChange={handleNewTaskInfo} name="priority" type="text" list='select-priority' className="input small primary filled" />
-                    <datalist id='select-priority' >
-                        <option value="Low">Low</option>
-                        <option value="Medium">Medium</option>
-                        <option value="High">High</option>
-                        <option value="Urgent">Urgent</option>
-                    </datalist> */}
+          <DropDown
+            options={["Low", "Medium", "High", "Urgent"]}
+            value={selectedOption}
+            handleSelected={setSelectedOption}
+          />
 
           <label>Status</label>
-          <DropDown options={["In progress", "Done", "Backlog"]} value={progress} handleSelected={setProgress} />
-
+          <DropDown
+            options={["In progress", "Done", "Backlog"]}
+            value={progress}
+            handleSelected={setProgress}
+          />
 
           <label> Assign to</label>
           <input
@@ -87,7 +81,6 @@ export function CreateNewTaskPage() {
             className="input small primary filled"
           />
         </div>
-
         <label> Description (supports markdown) </label>
         <textarea
           className="input primary filled"
@@ -95,13 +88,23 @@ export function CreateNewTaskPage() {
           name="description"
           rows={10}
         />
-
         <p> Select labels</p>
         <Labels
           selectedLabels={selectedLabels}
           setSelectedLabels={setSelectedLabels}
         />
-        <button className="btn primary small filled">Save</button>
+        <br /> <br /> <br /> <br /> <br /> <br />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+          }}
+        >
+          <button style={{ width: 200 }} className="btn primary small filled">
+            Save
+          </button>
+        </div>
       </div>
     </div>
   );
