@@ -55,7 +55,7 @@ export default function App() {
     return (
       <div onClick={(evt) => handleTaskClick(evt, item)} key={index.toString()} className="task-container">
         <span>  {index + 1}</span>
-        <span className="title"> {item.title} </span>
+        <span className="task-table-task-title"> {item.title} </span>
         <span className={addClass(item.priority)}> {item.priority} </span>
         <span> {item.status} </span>
         {/* <span> {new Date(item.dueDate).toLocaleString()} </span> */}
