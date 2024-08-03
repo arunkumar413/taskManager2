@@ -23,9 +23,7 @@ body {
 }
 
 .task-container:hover {
-  background-color: #9192b2;
-  color: white;
-  border-radius: 1rem;
+  background-color: #f1f3f6;
 }
 
 .task-header {
@@ -37,7 +35,6 @@ body {
   position: sticky;
   top: 0;
   padding: 0.5rem;
-  border-radius: 1rem;
   color: white;
 }
 
@@ -63,10 +60,6 @@ body {
 .urgent {
   color: red;
 }
-
-/* .task-container:hover {
-  background-color: whitesmoke;
-} */
 
 
 .date-category {
