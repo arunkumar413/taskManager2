@@ -21,9 +21,23 @@ export function EditTaskPage() {
 
 
     return (
-        <div className="EditTaskPage">
-            <div style={{ textAlign: 'center' }} className="new-task-heading">
+        <div className="EditTaskPage" style={{padding:'1rem'}}>
+            <div style={{
+                textAlign: 'center',
+                backgroundColor: "#f1f3f6",
+                display: "flex", flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: 'center',
+                gap:"1rem",
+                paddingLeft:'1rem',
+                paddingRight:'1rem',
+                marginBottom:'0.5rem'
+
+            }}
+                className="new-task-heading round">
                 <h2> Edit task</h2>
+                <button className="btn primary small filled">Update</button>
+
             </div>
             <div className="new-task-form">
                 <label>  Task title   </label>
@@ -67,7 +81,6 @@ export function EditTaskPage() {
 
                 <p> Select labels</p>
                 <Labels selectedLabels={selectedLabels} setSelectedLabels={setSelectedLabels} />
-                <button className="btn primary small filled">Update</button>
 
             </div>
 
